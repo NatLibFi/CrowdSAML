@@ -21,16 +21,14 @@
  * @license   https://www.gnu.org/licenses/gpl-3.0.txt GPL-3.0
  */
 
-namespace NatLibFi\Discourse;
+namespace NatLibFi\Crowd;
 
-use NatLibFi\Discourse\Crowd\CrowdApi;
-use NatLibFi\Discourse\Discourse\DiscourseApi;
-use NatLibFi\Discourse\Discourse\SingleSignOn;
+use NatLibFi\Crowd\CrowdApi;
 
 /**
  * Processes Discourse Authentication requests
  */
-class ForumAuth
+class SAMLAuth
 {
     /** @var string|null Path to the authentication log file or null for none */
     private $logFile;
@@ -40,9 +38,6 @@ class ForumAuth
 
     /** @var CrowdApi The Crowd api access */
     private $crowd;
-
-    /** @var DiscourseApi The Discourse api access */
-    private $discourse;
 
     /** @var string[] Full names for canonized group names */
     private $fullNames;
@@ -61,11 +56,6 @@ class ForumAuth
         $this->logFile = empty($settings['authLog']) ? null : strftime($settings['authLog']);
         $this->settings = $settings;
         $this->crowd = new CrowdApi($settings['crowdUrl'], $settings['crowdUsername'], $settings['crowdPassword']);
-        $this->discourse = new DiscourseApi(
-            $settings['discourseUrl'],
-            $settings['discourseUsername'],
-            $settings['discourseKey']
-        );
     }
 
     /**

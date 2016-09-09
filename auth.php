@@ -29,8 +29,10 @@ chdir(__DIR__);
 
 require 'vendor/autoload.php';
 
-$settings = json_decode(file_get_contents('forum_settings.json'), true);
-$auth = new NatLibFi\Discourse\ForumAuth($settings);
+$auth = new NatLibFi\Crowd\SAMLAuth($settings);
+
+
+/*
 
 try {
     if (isset($_GET['sso']) && isset($_GET['sig'])) {
@@ -61,3 +63,5 @@ try {
 
     throw $exception;
 }
+
+*/

@@ -6,14 +6,6 @@
   "groupTruncateLength" : 8,
   "groupShortName" : true,
 
-  "ssoSecret" : "",
-  "ssoUrl" : "",
-  "ssoCallbackUrl" : "",
-
-  "discourseUrl" : "",
-  "discourseUsername" : "",
-  "discourseKey" : "",
-
   "crowdUsername" : "",
   "crowdPassword" : "",
   "crowdUrl" : "",
