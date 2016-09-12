@@ -1,6 +1,7 @@
 .idea/
 logs/
 vendor/
-forum_settings.json
+crowd_settings.json
+composer.phar
 /nbproject/
 /nbproject/private/
