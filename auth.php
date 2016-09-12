@@ -29,39 +29,3 @@ chdir(__DIR__);
 
 require 'vendor/autoload.php';
 
-$auth = new NatLibFi\Crowd\SAMLAuth($settings);
-
-
-/*
-
-try {
-    if (isset($_GET['sso']) && isset($_GET['sig'])) {
-        $auth->processSsoRequest($_GET['sso'], $_GET['sig']);
-    } elseif (isset($_GET['ssoPayload'])) {
-        if (!$auth->processSsoResponse($_GET['ssoPayload'])) {
-            header($_SERVER["SERVER_PROTOCOL"] . ' 403 Forbidden', true, 403);
-            printf('Authentication failed. %s.', $auth->getAuthenticationError());
-        }
-    } else {
-        exit('Unexpected authentication request');
-    }
-} catch (Exception $exception) {
-    if ($exception instanceof \GuzzleHttp\Exception\ClientException) {
-        $response = $exception->getResponse();
-
-        if ($response->getStatusCode() === 429) {
-            header($_SERVER["SERVER_PROTOCOL"] . ' 503 Service Unavailable', true, 503);
-            echo 'The server was too busy to handle your request. Please try again.';
-            throw $exception;
-        }
-    }
-
-    header($_SERVER["SERVER_PROTOCOL"] . ' 500 Internal Server Error', true, 500);
-    echo
-        'Error occurred during authentication. Please try again or contact ' .
-        'an administrator, if the problem persists';
-
-    throw $exception;
-}
-
-*/

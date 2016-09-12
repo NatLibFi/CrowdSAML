@@ -43,7 +43,7 @@ class sspmod_authCrowd_Auth_Source_Crowd extends SimpleSAML_Auth_Source {
 		$this->url = $configObject->getString('url');
 		$this->loginUrl = $configObject->getString('loginUrl');
 		$this->username = $configObject->getString('username');
-		$this->password = $configObject->getBoolean('password');
+		$this->password = $configObject->getString('password');
 
                 $this->crowd = new CrowdApi($this->url, $this->username, $this->password);
 	}
