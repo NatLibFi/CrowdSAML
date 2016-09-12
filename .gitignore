@@ -2,3 +2,5 @@
 logs/
 vendor/
 forum_settings.json
+/nbproject/
+/nbproject/private/
