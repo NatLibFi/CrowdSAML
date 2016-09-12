@@ -5,7 +5,8 @@
 
   "autoload": {
     "psr-4": {
-      "NatLibFi\\Crowd\\" : "src//"
+      "NatLibFi\\Crowd\\" : "src//",
+      "NatLibFi\\Crowd\\Crowd\\" : "src//Crowd//"
     }
   }
 }

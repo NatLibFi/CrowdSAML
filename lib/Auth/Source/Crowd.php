@@ -1,6 +1,8 @@
 <?php
 
-require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/auth.php');
+require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/vendor/autoload.php');
+
+use NatLibFi\Crowd\Crowd;
 
 /**
  * Authenticate using Crowd.
@@ -45,7 +47,7 @@ class sspmod_authCrowd_Auth_Source_Crowd extends SimpleSAML_Auth_Source {
 		$this->username = $configObject->getString('username');
 		$this->password = $configObject->getString('password');
 
-                $this->crowd = new CrowdApi($this->url, $this->username, $this->password);
+                $this->crowd = new NatLibFi\Crowd\Crowd\CrowdApi($this->url, $this->username, $this->password);
 	}
 
 
@@ -73,17 +75,10 @@ class sspmod_authCrowd_Auth_Source_Crowd extends SimpleSAML_Auth_Source {
 
                 // we are not logged in yet, let's direct the user to log in
 
-                $returnUrl = sprintf(
-                    '%s?%s',
-                    $this->loginUrl,
-                    http_build_query(['ssoPayload' => base64_encode($sso->getPayload())], '', '&', PHP_QUERY_RFC3986)
-                );
-
                 SimpleSAML\Logger::debug('Redirecting to authentication portal');
 		$linkback = SimpleSAML\Module::getModuleURL('authcrowd/linkback.php', array('AuthState' => $stateID));
-                $query = http_build_query(['redirectTo' => $linkback], '', '&', PHP_QUERY_RFC3986);
-                header(sprintf('Location: %s?%s', $this->crowdUrl, $query), true, 302);
-
+                $params = ['redirectTo' => $linkback];
+		\SimpleSAML\Utils\HTTP::redirectTrustedURL($this->loginUrl, $params);
                 return false;
 	}
 	
