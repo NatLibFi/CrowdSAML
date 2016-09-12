@@ -20,6 +20,7 @@ class sspmod_authCrowd_Auth_Source_Crowd extends SimpleSAML_Auth_Source {
 	const AUTHID = 'crowd:AuthId';
 
 	private $url;
+        private $loginUrl;
 	private $username;
 	private $password;
         private $crowd;
@@ -40,6 +41,7 @@ class sspmod_authCrowd_Auth_Source_Crowd extends SimpleSAML_Auth_Source {
 		$configObject = SimpleSAML_Configuration::loadFromArray($config, 'authsources[' . var_export($this->authId, TRUE) . ']');
 
 		$this->url = $configObject->getString('url');
+		$this->loginUrl = $configObject->getString('loginUrl');
 		$this->username = $configObject->getString('username');
 		$this->password = $configObject->getBoolean('password');
 
@@ -73,7 +75,7 @@ class sspmod_authCrowd_Auth_Source_Crowd extends SimpleSAML_Auth_Source {
 
                 $returnUrl = sprintf(
                     '%s?%s',
-                    $this->settings['ssoUrl'],
+                    $this->loginUrl,
                     http_build_query(['ssoPayload' => base64_encode($sso->getPayload())], '', '&', PHP_QUERY_RFC3986)
                 );
 
